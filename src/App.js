@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
-import MenuSuperior from './components/MenuSuperior'
-import Filmes from './components/filmes/Filmes'
+import UpperMenu from './components/UpperMenu/UpperMenu'
 
 function App() {
   return (
     <div>
-      <MenuSuperior/>
-      <Filmes/>
+      <UpperMenu/>
     </div>
   );
 }
