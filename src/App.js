@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
 import './App.css';
 import UpperMenu from './components/UpperMenu/UpperMenu';
-import SearchArea from './components/SearchArea/SearchArea';
-
-
+import FilmeList from './components/FilmList/FilmeList'
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      movies: [],
+      films: [],
       searchTerms: ''
-    }  
-    this.apiKey = "95e310c9cdf43a266b381436c3d83fc8"//process.env.THE_MOVIE_DB_API
+    } 
+    this.apiKey = process.env.REACT_APP_THE_MOVIE_DB_API;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
+  componentDidMount(){
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=1`)
+    .then(results => results.json())
+    .then(data => {
+      this.setState({films: [...data.results]})
+    })
+  }
+
+  handleGenrer(){
+    fetch(``)
+    .then(results => results.json())
+    .then(data => {
+        this.setState({films: [...data.results]})
+    })
+}
 
   handleSubmit(e){
     e.preventDefault();
@@ -23,7 +37,7 @@ class App extends Component {
     .then(results => results.json())
     .then(data => {
       console.log(data);
-      this.setState({movies: [...data.results]})
+      this.setState({films: [...data.results]})
     })
   }
 
@@ -34,8 +48,8 @@ class App extends Component {
   render(){
     return (
       <div>
-        <UpperMenu/>
-        <SearchArea handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+        <UpperMenu handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+        <FilmeList films={this.state.films}/>
       </div>
     )};
 }
