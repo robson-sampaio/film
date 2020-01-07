@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import FilmeList from '../FilmList/FilmeList';
 
 class Genres extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
         this.state = {
             films: []
          }
@@ -12,11 +10,11 @@ class Genres extends Component {
 
     render() { 
         return (
-            <a className="dropdown-item" href="/">
+            <button type="button" className="dropdown-item" onClick={this.props.getGenreId}>
                 {
                     this.props.genres.name
                 }
-            </a>
+            </button>
          );
     }
 }

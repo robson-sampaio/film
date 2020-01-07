@@ -1,42 +1,60 @@
 import React, { Component } from 'react';
 import './App.css';
 import UpperMenu from './components/UpperMenu/UpperMenu';
-import FilmeList from './components/FilmList/FilmeList'
+import FilmeList from './components/FilmList/FilmeList';
+import {URL_API} from '../src/services/base'
+
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
       films: [],
-      searchTerms: ''
+      searchTerms: '',
+      genreId: '', 
+      genreList: []
     } 
     this.apiKey = process.env.REACT_APP_THE_MOVIE_DB_API;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getGenreId = this.getGenreId.bind(this);
+    this.getGenreList = this.getGenreList.bind(this);
   }
 
   componentDidMount(){
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=1`)
+    fetch(`${URL_API}movie/popular?api_key=${this.apiKey}&language=en-US&page=1`)
     .then(results => results.json())
     .then(data => {
       this.setState({films: [...data.results]})
     })
   }
 
-  handleGenrer(){
-    fetch(``)
+  getGenreId(e){
+    var i;
+    for(i = 0; i < this.state.genreList.length; i++){
+      if(this.state.genreList[i].name === e.target.textContent){
+        this.filmsByGenre(this.state.genreList[i].id)
+      }
+    }
+  }
+
+  getGenreList(genres){
+    this.setState({genreList: genres})
+  }
+
+  filmsByGenre(id){
+    fetch(`${URL_API}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`)
     .then(results => results.json())
     .then(data => {
-        this.setState({films: [...data.results]})
+        this.setState({films: data.results})
     })
-}
+  }
 
   handleSubmit(e){
     e.preventDefault();
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${this.state.searchTerms}`)
+    fetch(`${URL_API}search/movie?api_key=${this.apiKey}&query=${this.state.searchTerms}`)
     .then(results => results.json())
     .then(data => {
-      console.log(data);
       this.setState({films: [...data.results]})
     })
   }
@@ -48,7 +66,11 @@ class App extends Component {
   render(){
     return (
       <div>
-        <UpperMenu handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
+        <UpperMenu handleSubmit={this.handleSubmit} 
+                   handleChange={this.handleChange} 
+                   getGenreId={this.getGenreId}
+                   filmsByGenre={this.filmsByGenre}
+                   getGenreList={this.getGenreList}/>
         <FilmeList films={this.state.films}/>
       </div>
     )};
