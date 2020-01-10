@@ -8,7 +8,7 @@ class FilmeList extends Component {
     }
     render() { 
         return ( 
-            <div className="container mt-3">
+            // <div className="container mt-6">
                 <div className="row">
                     {
                         this.props.films.map((films, i) => {
@@ -18,7 +18,7 @@ class FilmeList extends Component {
                         })
                     }
                 </div>
-            </div>
+            // </div>
          );
     }
 }

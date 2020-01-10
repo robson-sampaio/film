@@ -21,11 +21,11 @@ class UpperMenu extends Component {
             this.props.getGenreList(this.state.genres)
         })
     }
-    
+
     render() { 
         return ( 
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
-                <a href="/" className="navbar-brand">Querubinha Filmes</a>
+                <a href="/" className="navbar-brand">QuerubinhaFlix</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                     <span className="navbar-toggler-icon"></span>
                 </button>

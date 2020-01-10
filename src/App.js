@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import UpperMenu from './components/UpperMenu/UpperMenu';
-import FilmeList from './components/FilmList/FilmeList';
+import Panel from './components/Panel/Panel'
 import {URL_API} from '../src/services/base'
 
 
@@ -71,7 +71,9 @@ class App extends Component {
                    getGenreId={this.getGenreId}
                    filmsByGenre={this.filmsByGenre}
                    getGenreList={this.getGenreList}/>
-        <FilmeList films={this.state.films}/>
+        <Panel films={this.state.films}/>
+        {/* <FilmeList films={this.state.films}/> */}
+        
       </div>
     )};
 }
