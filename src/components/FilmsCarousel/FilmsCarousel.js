@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import Film from './../Film/Film';
+import {URL_API} from './../../services/base'
 
 class FilmsCarousel extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = { 
+            films: []
+         }
+        this.apiKey = process.env.REACT_APP_THE_MOVIE_DB_API;
     }
+
+    componentDidMount(){
+        fetch(`${URL_API}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${this.props.genreId}`)
+        .then(results => results.json())
+        .then(data => {
+            this.setState({films: data.results})
+        })
+    }
+
     render() { 
         return ( 
             <div className="container-fluid">
