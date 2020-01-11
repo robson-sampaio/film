@@ -14,12 +14,12 @@ class Panel extends Component {
     }
 
     componentDidMount() {
-        fetch(`${URL_API}genre/movie/list?api_key=${this.apiKey}&language=en-US`)
+        fetch(`${URL_API}genre/movie/list?api_key=${this.apiKey}&language=en-US`) // getting genre list from API
         .then(results => results.json())
-        .then(data => {
-            this.setState({genreList: data.genres})
+        .then(data => {            
+            this.setState({genreList: [...data.genres]})
         })
-    }
+    }// I am getting the genre list in here because I will display the movies by genre inside a carousel for each genre
 
     render() { 
         return ( 
@@ -28,9 +28,12 @@ class Panel extends Component {
                     {
                         this.state.genreList.map((genre, i) => {
                             return (
-                                <li className="list-group-item">
-                                    <FilmsCarousel key={i} films={this.props.films} listRef={genre.name} genreId={genre.id}/>
-                                </li> 
+                                <div className="container my-2">
+                                    <div className="row-header-title">{genre.name}</div>
+                                    <li key={i} className="list-group-item">
+                                        <FilmsCarousel id={genre.id} listRef={genre.name}/>
+                                    </li>
+                                </div> 
                             )
                         })
                     } 

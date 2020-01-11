@@ -12,7 +12,7 @@ class FilmsCarousel extends Component {
     }
 
     componentDidMount(){
-        fetch(`${URL_API}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${this.props.genreId}`)
+        fetch(`${URL_API}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${this.props.id}`)
         .then(results => results.json())
         .then(data => {
             this.setState({films: data.results})
@@ -33,7 +33,7 @@ class FilmsCarousel extends Component {
                         <div className="carousel-item active">
                             <div className="row">
                                 {
-                                    this.props.films.map((film, i) => {
+                                    this.state.films.map((film, i) => {
                                         if(i < 5){                                        
                                             return (
                                                 <Film key={i} image={film.poster_path} films={this.props.films}/>
@@ -49,7 +49,7 @@ class FilmsCarousel extends Component {
                         <div className="carousel-item">
                             <div className="row">
                                 {
-                                    this.props.films.map((film, i) => {
+                                    this.state.films.map((film, i) => {
                                         if(i >= 5 && i < 10){                                        
                                             return (
                                                 <Film key={i} image={film.poster_path} films={this.props.films}/>
@@ -65,7 +65,7 @@ class FilmsCarousel extends Component {
                         <div className="carousel-item">
                             <div className="row">
                                 {
-                                    this.props.films.map((film, i) => {
+                                    this.state.films.map((film, i) => {
                                         if(i >= 10 && i < 15){                                        
                                             return (
                                                 <Film key={i} image={film.poster_path} films={this.props.films}/>
@@ -81,7 +81,7 @@ class FilmsCarousel extends Component {
                         <div className="carousel-item">
                             <div className="row">
                                 {
-                                    this.props.films.map((film, i) => {
+                                    this.state.films.map((film, i) => {
                                         if(i >= 15 && i < 20){                                        
                                             return (
                                                 <Film key={i} image={film.poster_path} films={this.props.films}/>

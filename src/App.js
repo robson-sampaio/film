@@ -15,39 +15,6 @@ class App extends Component {
       genreList: []
     } 
     this.apiKey = process.env.REACT_APP_THE_MOVIE_DB_API;
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.getGenreId = this.getGenreId.bind(this);
-    this.getGenreList = this.getGenreList.bind(this);
-  }
-
-  componentDidMount(){
-    fetch(`${URL_API}movie/popular?api_key=${this.apiKey}&language=en-US&page=1`)
-    .then(results => results.json())
-    .then(data => {
-      this.setState({films: [...data.results]})
-    })
-  }
-
-  getGenreId(e){
-    var i;
-    for(i = 0; i < this.state.genreList.length; i++){
-      if(this.state.genreList[i].name === e.target.textContent){
-        this.filmsByGenre(this.state.genreList[i].id)
-      }
-    }
-  }
-
-  getGenreList(genres){
-    this.setState({genreList: genres})
-  }
-
-  filmsByGenre(id){
-    fetch(`${URL_API}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`)
-    .then(results => results.json())
-    .then(data => {
-        this.setState({films: data.results})
-    })
   }
 
   handleSubmit(e){
@@ -67,11 +34,8 @@ class App extends Component {
     return (
       <div>
         <UpperMenu handleSubmit={this.handleSubmit} 
-                   handleChange={this.handleChange} 
-                   getGenreId={this.getGenreId}
-                   filmsByGenre={this.filmsByGenre}
-                   getGenreList={this.getGenreList}/>
-        <Panel films={this.state.films}/>
+                   handleChange={this.handleChange}/>
+        <Panel/>
         {/* <FilmeList films={this.state.films}/> */}
         
       </div>
