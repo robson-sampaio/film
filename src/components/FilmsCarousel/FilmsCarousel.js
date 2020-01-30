@@ -12,7 +12,7 @@ class FilmsCarousel extends Component {
     }
 
     componentDidMount(){
-        fetch(`${URL_API}discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${this.props.id}`)
+        fetch(`${URL_API}/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${this.props.id}`)
         .then(results => results.json())
         .then(data => {
             this.setState({films: data.results})
@@ -36,7 +36,7 @@ class FilmsCarousel extends Component {
                                     this.state.films.map((film, i) => {
                                         if(i < 5){                                        
                                             return (
-                                                <Film key={i} image={film.poster_path} films={this.props.films}/>
+                                                <Film handleClick={this.props.handleClick} key={i} index={i} image={film.poster_path} film={film}/>
                                             )
                                         }
                                         else{
@@ -95,15 +95,15 @@ class FilmsCarousel extends Component {
                             </div>                            
                         </div>
                     </div>
-                        <a className="carousel-control-prev" href={"#" + this.props.listRef} role="button" data-slide="prev">
-                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span className="sr-only">Previous</span>
-                        </a>
-                        <a className="carousel-control-next" href={"#" + this.props.listRef} role="button" data-slide="next">
-                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span className="sr-only">Next</span>
-                        </a>
-                    </div>
+                    <a className="carousel-control-prev" href={"#" + this.props.listRef} role="button" data-slide="prev">
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="sr-only">Previous</span>
+                    </a>
+                    <a className="carousel-control-next" href={"#" + this.props.listRef} role="button" data-slide="next">
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
                
          );

@@ -1,4 +1,9 @@
-.App {
+.panel {
+  background-color: #282c34;
+  /* #b53434 */
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +40,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

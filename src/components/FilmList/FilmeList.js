@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
-import Film from '../Film/Film'
 
 class FilmeList extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
+    }    
+
+    handleClick(e){
+        console.log(e)
     }
+    
     render() { 
         return ( 
-            // <div className="container mt-6">
-                <div className="row">
-                    {
-                        this.props.films.map((films, i) => {
-                            return (
-                                <Film key={i} image={films.poster_path}/>
-                            )
-                        })
-                    }
+                <div className="col-sm-2">
+                    <div className="card-mb-2">
+                        <img onClick={() => this.props.handleClick(this)} className="card-img-top" src={`https://image.tmdb.org/t/p/w500/${this.props.image}`} alt="poster"></img>
+                    </div>
                 </div>
-            // </div>
-         );
-    }
+            );
+        }
+        
 }
  
 export default FilmeList;

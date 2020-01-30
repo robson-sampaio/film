@@ -13,7 +13,7 @@ class SearchArea extends Component {
                             placeholder="Search" 
                             arial-label="Search"
                             onChange={this.props.handleChange}></input>
-                    <button className="btn btn-outline-success my-2 my-sm-0" 
+                    <button className="btn btn-outline-danger my-2 my-sm-0" 
                             type="submit">Search</button>
                 </form>         
          );
