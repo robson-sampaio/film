@@ -36,7 +36,7 @@ class FilmsCarousel extends Component {
                                     this.state.films.map((film, i) => {
                                         if(i < 5){                                        
                                             return (
-                                                <Film handleClick={this.props.handleClick} key={i} index={i} image={film.poster_path} film={film}/>
+                                                <Film handleClick={this.props.handleClick} key={i} index={i} image={film.poster_path} film={film} title={film.title} overview={film.overview}/>
                                             )
                                         }
                                         else{

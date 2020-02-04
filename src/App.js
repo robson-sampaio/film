@@ -32,7 +32,7 @@ class App extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${URL_API}/search/movie?api_key=${this.apiKey}&language=en-US&query=${this.state.searchTerms}&page=1&include_adult=true`)
+    fetch(`${URL_API}/search/movie?api_key=${this.apiKey}&language=en-US&query=${this.state.searchTerms}&page=1&include_adult=false`)
     .then(results => results.json())
     .then(data => {
       this.setState({films: [...data.results]})      
@@ -45,8 +45,6 @@ class App extends Component {
   }
 
   handleClick = (e) => {
-    // e.preventDefault();
-    // this.setState({filmDetails: e.target.value})
     console.log(e.props.film)
   }
 
@@ -56,7 +54,7 @@ class App extends Component {
         <UpperMenu handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
         <div className="panel">
           <Switch>
-            {/* <Route path="/Test"><Test msg="sera?" handleClick={this.handleClick} searchTerms={this.state.searchTerms}/></Route> */}
+            <Route path="/Test"><Test msg="sera?" handleClick={this.handleClick} searchTerms={this.state.searchTerms}/></Route>
             <Route path="/PanelSearch"><PanelSearch handleClick={this.handleClick} films={this.state.films}/></Route>
             <Route path="/"><Panel isTrue={this.state.isTrue} handleClick={this.handleClick} genreList={this.state.genreList} films={this.state.films}/></Route>
           </Switch>        
